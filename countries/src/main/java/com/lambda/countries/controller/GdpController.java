@@ -34,9 +34,9 @@ public class GdpController
     @GetMapping(value = "/economy")
     public ResponseEntity<?> getByGDP()
     {
-        logger.info("/names was accessed");
+        logger.info("/economy  accessed");
         GdpList rtnGdpList = GdpApplication.ourGdpList;
-        rtnGdpList.gdpList.sort((g1, g2) -> (int) (g2.getGdp() - g2.getGdp()));
+        rtnGdpList.gdpList.sort((g1, g2) -> (int) (g2.getGdp() - g1.getGdp()));
         return new ResponseEntity<>(rtnGdpList, HttpStatus.OK);
     }
 
@@ -78,9 +78,9 @@ public class GdpController
             @PathVariable
                     String end) {
         logger.info("/gdp/list/" + start + "/" + end + " was accessed");
-        GdpList tmpEconomyList = GdpApplication.ourGdpList;
-        tmpEconomyList.gdpList.sort((g1, g2) -> (int) (g2.getGdp() - g1.getGdp()));
-        ArrayList<GDP> rtnList = tmpEconomyList.findEconomies(g -> {
+        GdpList tmpGdpList = GdpApplication.ourGdpList;
+        tmpGdpList.gdpList.sort((g1, g2) -> (int) (g2.getGdp() - g1.getGdp()));
+        ArrayList<GDP> rtnList = tmpGdpList.findEconomies(g -> {
             if (g.getGdp() >= Long.parseLong(start) && g.getGdp() <= Long.parseLong(end)) {
                 return true;
             } else {
@@ -94,8 +94,8 @@ public class GdpController
     @GetMapping(value = "/economy/table")
     public ModelAndView displayEconomiesTable()
     {
-        GdpList rtnGdpList = GdpApplication.ourGdpList;
-        rtnGdpList.gdpList.sort((g1, g2) -> (int) (g2.getGdp() - g1.getGdp()));
+        ArrayList<GDP> rtnGdpList = GdpApplication.ourGdpList.gdpList;
+        rtnGdpList.sort((g1, g2) -> (int) (g2.getGdp() - g1.getGdp()));
         logger.info("/economy/table was accessed");
         ModelAndView mav = new ModelAndView();
         mav.setViewName("countries");

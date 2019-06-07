@@ -8,7 +8,7 @@
         <version>2.1.5.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.lambda</groupId>
+    <groupId>com.lambdaschool</groupId>
     <artifactId>countries</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>countries</name>
