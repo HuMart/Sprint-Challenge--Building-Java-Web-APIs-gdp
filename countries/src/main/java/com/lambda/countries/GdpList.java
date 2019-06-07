@@ -116,11 +116,11 @@ public class GdpList
 
     public GDP findGdp(CheckGdp tester)
     {
-        for (GDP x : gdpList)
+        for (GDP g : gdpList)
         {
-            if (tester.test(x))
+            if (tester.test(g))
             {
-                return x;
+                return g;
             }
         }
         return null;
@@ -130,11 +130,11 @@ public class GdpList
     {
         ArrayList<GDP> tempGdpList = new ArrayList<>();
 
-        for (GDP x : gdpList)
+        for (GDP g : gdpList)
         {
-            if (tester.test(x))
+            if (tester.test(g))
             {
-                tempGdpList.add(x);
+                tempGdpList.add(g);
             }
         }
 
@@ -145,10 +145,20 @@ public class GdpList
         ArrayList<GDP> tempList = new ArrayList<>();
         tempList.addAll(gdpList);
 
-        int len = gdpList.size();
+        int var = gdpList.size();
 
         tempList.sort((g1, g2) -> (int) (g1.getGdp() - g2.getGdp()));
 
-        return tempList.get((len/2));
+        return tempList.get((var/2));
+    }
+
+    public GDP getTotal() {
+        long total = 0;
+        for (GDP g : gdpList) {
+            total += g.getGdp();
+        }
+        GDP rtnGdp = new GDP("Total", total);
+        return rtnGdp;
     }
 }
+

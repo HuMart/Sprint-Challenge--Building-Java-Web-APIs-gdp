@@ -67,7 +67,7 @@
         </rollingPolicy>
     </appender>
 
-    <root level="INFO">
+    <root level="OFF">
         <appender-ref ref="FILE"/>
         <appender-ref ref="STDOUT"/>
     </root>
@@ -79,24 +79,24 @@
     </logger>
     <!--*** Part 3-->
 
-    <logger name="org.apache.catalina" level="OFF" additivity="false">
+    <logger name="org.apache.catalina" level="INFO" additivity="false">
         <appender-ref ref="TOMCAT" />
         <appender-ref ref="STDOUT" />
     </logger>
 
-    <logger name="org.apache.coyote" level="OFF" additivity="false" >
+    <logger name="org.apache.coyote" level="INFO" additivity="false" >
         <appender-ref ref="TOMCAT" />
         <appender-ref ref="STDOUT" />
     </logger>
 
-    <logger name="org.apache.tomcat" level="OFF" additivity="false">
+    <logger name="org.apache.tomcat" level="INFO" additivity="false">
         <appender-ref ref="TOMCAT" />
         <appender-ref ref="STDOUT" />
     </logger>
 
     <!--*** Part 5-->
 
-    <logger name="com.lambdaschool" level="TRACE" additivity="false">
+    <logger name="com.lambdaschool" level="info" additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
 </configuration>

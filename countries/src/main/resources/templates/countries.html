@@ -10,9 +10,9 @@
         <th>GDP</th>
     </tr>
 
-    <tr th:each="country : ${countryList}">
-        <td th:text="${country.name}">First Name</td>
-        <td th:text="${country.gdp}">Last Name</td>
+    <tr th:each="gdp : ${gdpList}">
+        <td th:text="${gdp.cname}">First Name</td>
+        <td th:text="${gdp.gdp}">Last Name</td>
     </tr>
 </table>
 <strong><a href="/">Click here to go back</a></strong>

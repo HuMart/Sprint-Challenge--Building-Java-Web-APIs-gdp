@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/economies")
 public class GdpController
@@ -23,7 +25,7 @@ public class GdpController
     @GetMapping(value = "/names")
     public ResponseEntity<?> getByName()
     {
-        logger.info("/names was accessed");
+        logger.info("/names  accessed");
         GdpList rtnGdpList = GdpApplication.ourGdpList;
         rtnGdpList.gdpList.sort((g1, g2) -> g1.getCname().compareToIgnoreCase(g2.getCname()));
         return new ResponseEntity<>(rtnGdpList, HttpStatus.OK);
@@ -60,6 +62,34 @@ public class GdpController
         logger.info("/country/stats/median was accessed");
         return new ResponseEntity<>(GdpApplication.ourGdpList.findMedianGdp(), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/total",
+                produces = {"application/json"})
+    public ResponseEntity<?> getTotal() {
+        logger.info("/total, accessed");
+        return new ResponseEntity<>(GdpApplication.ourGdpList.getTotal(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/gdp/list/{start}/{end}",
+                produces = {"application/json"})
+    public ResponseEntity<?> getLimitedGdpList(
+            @PathVariable
+                    String start,
+            @PathVariable
+                    String end) {
+        logger.info("/gdp/list/" + start + "/" + end + " was accessed");
+        GdpList tmpEconomyList = GdpApplication.ourGdpList;
+        tmpEconomyList.gdpList.sort((g1, g2) -> (int) (g2.getGdp() - g1.getGdp()));
+        ArrayList<GDP> rtnList = tmpEconomyList.findEconomies(g -> {
+            if (g.getGdp() >= Long.parseLong(start) && g.getGdp() <= Long.parseLong(end)) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+        return new ResponseEntity<>(rtnList, HttpStatus.OK);
+    }
+
 
     @GetMapping(value = "/economy/table")
     public ModelAndView displayEconomiesTable()

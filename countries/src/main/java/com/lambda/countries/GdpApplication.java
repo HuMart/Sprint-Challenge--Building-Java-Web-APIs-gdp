@@ -14,9 +14,7 @@ public class GdpApplication
     public static void main(String[] args)
     {
         ourGdpList = new GdpList();
-        ApplicationContext ctx = SpringApplication.run(GdpApplication.class, args);
+        SpringApplication.run(GdpApplication.class, args);
 
-        DispatcherServlet dispatcherServlet = (DispatcherServlet)ctx.getBean("dispatcherServlet");
-        dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
     }
 }
